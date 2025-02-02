@@ -1,0 +1,50 @@
+services:
+  redis:
+    image: redis:6.2-alpine
+    restart: unless-stopped
+    command: redis-server --save 20 1 --loglevel warning
+    dns:
+      - 1.1.1.1
+    volumes:
+      - redis:/data
+  app:
+    dns:
+      - 1.1.1.1
+
+    image: node:18-alpine
+    restart: unless-stopped
+    command: sh ./startapp.sh
+    ports:
+      - ${APP_HOST:-127.0.0.1}:${APP_PORT:-8000}:8000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DB: main
+      DOCKER: yes
+      AUTO_RELOAD: ${AUTO_RELOAD:-no}
+      DEBUG: ${DEBUG:-yes}
+      VIRUS_TOTAL_API_KEY: ${VIRUS_TOTAL_API_KEY}
+    depends_on:
+      - db
+      - redis
+
+  db:
+    dns:
+      - 1.1.1.1
+
+    image: mysql:8.0
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: main
+
+volumes:
+  db:
+  redis:

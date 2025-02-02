@@ -1,0 +1,78 @@
+  <%- include('include/header') -%>
+  <h1>
+  My Links (<%= (extra.myLinks && extra.myLinks.length> 0) ? extra.myLinks.length : 0 %> links)
+  </h1>
+  <% if (extra.message && extra.message.length > 0) { %>
+    <h3 class="error">Message: <%= extra.message %> </h3>
+    <% } %>
+  <form class="pure-form pure-form-aligned" method="POST" action="/link/">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="aligned-url">URL</label>
+            <input type="text" id="aligned-url" name="url" />
+            <span class="pure-form-message-inline">Must be a valid URL. Please make sure it doesn't have malicious content. Thank you.</span>
+        </div>
+        <div class="pure-control-group">
+            <label for="aligned-name">Name</label>
+            <input type="text" id="aligned-name" name="name" />
+            <span class="pure-form-message-inline">The name of the link.</span>
+        </div>
+        <div class="pure-controls">
+            <button type="submit" class="pure-button pure-button-primary">Create</button>
+        </div>
+    </fieldset>
+  </form>
+  <% if (extra.myLinks && extra.myLinks.length> 0) { %>
+    <table class="pure-table pure-table-horizontal">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Alias</th>
+                <th>Virus Check</th>
+                <th>Actions</th>
+                <th>Target</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% extra.myLinks.forEach( link=> { %>
+                <tr>
+                    <td id="link-<%= link.id %>-name">
+                        <%= link.name %>
+                    </td>
+                    <td><a href="/s/<%= link.short_alias %>">
+                            <%= link.short_alias %>
+                        </a></td>
+                    <td>
+                        <%= link.is_dangerous_info %>
+                    </td>
+                    <td>
+                    <% if (link.is_public) { %>
+                    <form action="/link-make-private/" method="POST">
+                    <input type="hidden" name="id" value="<%= link.id %>">
+                     <button type="submit" id="link-<%= link.id %>-action-makeprivate" class="pure-button button-redish link-make-private-button">Make Private</button> &nbsp;&nbsp;
+                     </form>
+                     <% } else { %>
+                    <form action="/link-make-public/" method="POST">
+                    <input type="hidden" name="id" value="<%= link.id %>">
+                     <button type="submit" id="link-<%= link.id %>-action-makepublic" class="pure-button pure-button-primary link-make-public-button">Make Public</button> &nbsp;&nbsp;
+                     </form>
+                     <% } %>
+                    <form action="/delete-link/" method="POST">
+                    <input type="hidden" name="id" value="<%= link.id %>">
+                     <button type="submit" id="link-<%= link.id %>-action-delete" class="pure-button button-redish link-delete-button">Delete</button> &nbsp;&nbsp;
+                     </form>
+
+                    </td>
+                    <td><%= link.url %></td>
+
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+    <% } else { %>
+        <h2>When you add links, they will appear here.</h2>
+
+        <% } %>
+
+  <%- include('include/footer') -%>

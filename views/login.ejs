@@ -1,0 +1,25 @@
+<%- include('include/header') -%>
+<h1>
+Login
+</h1>
+<% if (extra.message && extra.message.length > 0) { %>
+<h3 class="error">Message: <%= extra.message %> </h3>
+<% } %>
+<form class="pure-form pure-form-aligned" method="POST" action="/login/">
+  <fieldset>
+      <div class="pure-control-group">
+          <label for="aligned-name">Username</label>
+          <input type="text" id="aligned-name" name="username" />
+          <span class="pure-form-message-inline">Please enter your username.</span>
+      </div>
+      <div class="pure-control-group">
+          <label for="aligned-password">Password</label>
+          <input type="password" id="aligned-password" name="password" />
+          <span class="pure-form-message-inline">Please enter your password.</span>
+      </div>
+      <div class="pure-controls">
+          <button type="submit" class="pure-button pure-button-primary">Submit</button>
+      </div>
+  </fieldset>
+</form>
+<%- include('include/footer') -%>

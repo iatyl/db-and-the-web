@@ -1,0 +1,53 @@
+  <%- include('include/header') -%>
+  <h1>
+    Search Links
+  </h1>
+  <h3>
+    Search public links and your own links.
+  </h3>
+  <form id="search-form" class="pure-form pure-form-aligned" method="POST" action="/search/">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="aligned-query">Search Links</label>
+            <input required="required" type="text" id="aligned-query" name="query" placeholder="Joe Rogan..." value="<%= extra.query %>" />
+            <button type="submit" class="pure-button pure-button-primary">search</button>
+        </div>
+    </fieldset>
+  </form>
+  <% if (extra.post) { %>
+  <% if (extra.results && extra.results.length> 0) { %>
+    <table class="pure-table pure-table-horizontal">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>URL</th>
+                <th>Virus Check</th>
+                <th>Target</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% extra.results.forEach( link=> { %>
+                <tr>
+                    <td>
+                        <%= link.name %>
+                    </td>
+                    <td><a class="pure-button pure-button-primary" href="/s/<%= link.short_alias %>">
+                            <%= link.short_alias %>
+                        </a></td>
+                    <td>
+                        <%= link.is_dangerous_info %>
+                    </td>
+                    <td>
+                      <%= link.url %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+    <% } else { %>
+        <h2>No results!</h2>
+
+        <% } %>
+        <% } %>
+  <%- include('include/footer') -%>

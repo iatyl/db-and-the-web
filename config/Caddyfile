@@ -1,0 +1,29 @@
+(geofilter) {
+    @geofilter {
+      not maxmind_geolocation {
+        db_path "/usr/share/GeoIP/GeoLite2-City.mmdb"
+        deny_countries IR VN
+      }
+    }
+    respond @geofilter "Your access is denied due to potential spamming behavior." 200
+}
+
+(headers) {
+    header {
+        -Server
+	-x-powered-by
+    }
+}
+
+miniproject.gscoursework.thealois.com {
+	@limit expression path_regexp('^/register(.*)') || path_regexp('^/login(.*)')
+
+	route {
+		 rate_limit @limit {remote.ip} 30r/m
+		 reverse_proxy 127.0.0.1:8002
+
+	}
+	encode zstd gzip
+	import geofilter
+	import headers
+}

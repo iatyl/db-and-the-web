@@ -1,0 +1,13 @@
+  <%- include('include/header') -%>
+  <h1>
+    Link <%= (extra.action && extra.action.length > 0) ? extra.action : "Action" %>
+  </h1>
+  <h3>
+  <% if (extra.message && extra.message.length > 0) { %>
+    Link <%= extra.action ? extra.action : "Action" %> failed, because: <%= extra.message %>
+    <% } else { %>
+    Link <%= extra.action ? extra.action : "Action" %> was successful!
+  <% } %>
+  </h3>
+
+  <%- include('include/footer') -%>

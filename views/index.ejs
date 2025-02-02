@@ -1,0 +1,33 @@
+<%- include('include/header') -%>
+<h1>Public Links</h1>
+    <% if (extra.publicLinks && extra.publicLinks.length> 0) { %>
+        <table class="pure-table pure-table-horizontal">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>URL</th>
+                    <th>Virus Check</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% extra.publicLinks.forEach( link=> { %>
+                    <tr>
+                        <td>
+                            <%= link.name %>
+                        </td>
+                        <td><a class="pure-button pure-button-primary" href="/s/<%= link.short_alias %>">
+                                <%= link.short_alias %>
+                            </a></td>
+                        <td>
+                            <%= link.is_dangerous_info %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+        <% } else { %>
+            <h2>When our users publicize their their links, they will appear here.</h2>
+
+            <% } %>
+                <%- include('include/footer') -%>
