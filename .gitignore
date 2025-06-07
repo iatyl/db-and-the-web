@@ -1,0 +1,11 @@
+node_modules
+.idea
+.vscode
+yarn.lock
+.env
+dump.rdb
+nohup.out
+yarn-error.log
+public/docs
+submission/main.pdf
+submission/main.ist

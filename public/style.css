@@ -1,0 +1,43 @@
+html {
+  margin-left: 4vw;
+  background-color: #ffffcc;
+}
+#content-container {
+    margin-left: 8vw;
+    margin-right: 5vw;
+  
+}
+a {
+  color: #000;
+  text-decoration: underline;
+}
+.error {
+  background-color: #f00;
+  color: #ffffcc;
+}
+.button-redish {
+  color: #fff;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background-color: #f00;
+}
+
+
+/* https://www.w3schools.com/howto/howto_js_navbar_sticky.asp */
+ #docbar {
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  #docbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+  
+  .has-doc {
+    padding: 16px;
+  }

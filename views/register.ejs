@@ -1,0 +1,29 @@
+<%- include('include/header') -%>
+<h1>
+  Register
+</h1>
+<% if (extra.registered === true) { %>
+<h1>Registration was successful! And you are logged in now.</h1>
+<% } else { %>
+<% if (extra.message && extra.message.length > 0) { %>
+<h3 class="error">Message: <%= extra.message %> </h3>
+<% } %>
+<form class="pure-form pure-form-aligned" method="POST" action="/register/">
+  <fieldset>
+      <div class="pure-control-group">
+          <label for="aligned-name">Username</label>
+          <input type="text" id="aligned-name" name="username" />
+          <span class="pure-form-message-inline">This is a required field. Must be longer than 2 characters.</span>
+      </div>
+      <div class="pure-control-group">
+          <label for="aligned-password">Password</label>
+          <input type="password" id="aligned-password" name="password" />
+          <span class="pure-form-message-inline">The password should have 6 or more characters.</span>
+      </div>
+      <div class="pure-controls">
+          <button type="submit" class="pure-button pure-button-primary">Submit</button>
+      </div>
+  </fieldset>
+</form>
+<% } %>
+<%- include('include/footer') -%>

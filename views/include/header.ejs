@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= context.title %></title>
+    <link rel="stylesheet"  type="text/css" href="/pure-min.css" />
+    <link rel="stylesheet"  type="text/css" href="/highlight.min.css" />
+    <script src="/highlight.min.js"></script>
+    <link rel="stylesheet"  type="text/css" href="/style.css" />
+</head>
+<body>
+    <h2><%= context.title %></h2>
+<h2>
+    <% if(!session.user){ %>
+        <a class="pure-button pure-button-primary" href="/register/">Register</a> &nbsp;&nbsp;
+        <a class="pure-button pure-button-primary" href="/login/">Login</a> &nbsp;&nbsp;
+    <% } else { %>
+            <a class="pure-button pure-button-primary" href="/logout/">Logout</a> &nbsp;&nbsp;
+    <% } %>
+
+</h2>
+<h2>
+    <% if(session.user){ %>
+        Welcome, <span style="text-decoration: underline;"><%= session.user.username %></span>!
+        <a href="/my-links/">My Links</a> &nbsp;&nbsp;
+    <% } %>
+    <a href="/">Home</a> &nbsp;&nbsp;
+    <a href="/search/">Search</a> &nbsp;&nbsp;
+    <a href="/about/">About</a> &nbsp;&nbsp;
+    <a href="/docs/">Docs</a> &nbsp;&nbsp;
+    <% if(extra.doc) { %>
+    <!-- https://www.w3schools.com/howto/howto_js_navbar_sticky.asp -->
+        <div id="docbar">
+            <a>Linky Public Documentation</a>
+            <a href="/docs/">Home</a>
+            <a href="/docs/quickstart/">Quick Start</a>
+          </div>
+    <% } %>
+</h2>
+<hr>
+<div id="content-container">

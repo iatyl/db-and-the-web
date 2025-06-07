@@ -1,0 +1,7 @@
+  <%- include('include/header') -%>
+  <% if (!extra.doc || !extra.docContent || extra.docContent.length === 0)  { %>
+    <h2>Could not load documentation content.</h2>
+  <% } else { %>
+  <%- extra.docContent %>
+  <% } %>
+  <%- include('include/footer') -%>
